@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfContact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Contact>
+    <Name>Иван</Name>
+    <Id>608310</Id>
+    <Phone>+3952635418</Phone>
+  </Contact>
+  <Contact>
+    <Name>Георги</Name>
+    <Id>706038</Id>
+    <Phone>+3958938743</Phone>
+  </Contact>
+  <Contact>
+    <Name>Александра</Name>
+    <Id>268742</Id>
+    <Phone>+3951598890</Phone>
+  </Contact>
+  <Contact>
+    <Name>Христо</Name>
+    <Id>355175</Id>
+    <Phone>+3951161271</Phone>
+  </Contact>
+  <Contact>
+    <Name>Петър</Name>
+    <Id>325168</Id>
+    <Phone>+3959058897</Phone>
+  </Contact>
+  <Contact>
+    <Name>Марин</Name>
+    <Id>578028</Id>
+    <Phone>+3957251283</Phone>
+  </Contact>
+  <Contact>
+    <Name>Ивана</Name>
+    <Id>636742</Id>
+    <Phone>+3957687655</Phone>
+  </Contact>
+  <Contact>
+    <Name>Маргарита</Name>
+    <Id>199735</Id>
+    <Phone>+3957191626</Phone>
+  </Contact>
+</ArrayOfContact>
