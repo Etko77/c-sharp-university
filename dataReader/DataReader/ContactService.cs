@@ -8,61 +8,28 @@ using System.Globalization;
 public class ContactService
 {
     public static void ProcessFile(string inputPath, string outputPath)
+{
+    var lines = File.ReadAllLines(inputPath);
+    var contacts = new List<Contact>();
+
+    foreach (var line in lines)
     {
-        string text = File.ReadAllText(inputPath);
-
-        // regex
-        var phoneRegex = new Regex(@"\+395\s?\d{3}\s?\d{2}\s?\d{2}");
-        var idRegex = new Regex(@"\b\d{6}\b");
-        var nameRegex = new Regex(@"[А-Яа-я]+");
-
-        var matches = new List<(int index, string type, string value)>();
-
-        foreach (Match m in phoneRegex.Matches(text))
-            matches.Add((m.Index, "phone", NormalizePhone(m.Value)));
-
-        foreach (Match m in idRegex.Matches(text))
-            matches.Add((m.Index, "id", m.Value));
-
-        foreach (Match m in nameRegex.Matches(text))
-            matches.Add((m.Index, "name", m.Value));
-
-        // sorting
-        matches.Sort((a, b) => a.index.CompareTo(b.index));
-
-        List<Contact> contacts = new List<Contact>();
-
-        string name = null, id = null, phone = null;
-
-        foreach (var item in matches)
+        var match = Regex.Match(line, @"(?<name>[А-Яа-я]+)\s+(?<id>\d{6})\s+(?<phone>\+395\s?\d{3}\s?\d{2}\s?\d{2})");
+        if (match.Success)
         {
-            if (item.type == "name" && name == null)
-                name = item.value;
-
-            else if (item.type == "id" && id == null)
-                id = item.value;
-
-            else if (item.type == "phone" && phone == null)
-                phone = item.value;
-
-            if (name != null && id != null && phone != null)
+            contacts.Add(new Contact
             {
-                contacts.Add(new Contact
-                {
-                    Name = name,
-                    Id = id,
-                    Phone = phone
-                });
-
-                name = id = phone = null;
-            }
+                Name = match.Groups["name"].Value,
+                Id = match.Groups["id"].Value,
+                Phone = match.Groups["phone"].Value.Replace(" ", "")
+            });
         }
-
-        // XML
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Contact>));
-        using var fs = new FileStream(outputPath, FileMode.Create);
-        serializer.Serialize(fs, contacts);
     }
+
+    XmlSerializer serializer = new XmlSerializer(typeof(List<Contact>));
+    using var fs = new FileStream(outputPath, FileMode.Create);
+    serializer.Serialize(fs, contacts);
+}
 
     private static string NormalizePhone(string phone)
     {

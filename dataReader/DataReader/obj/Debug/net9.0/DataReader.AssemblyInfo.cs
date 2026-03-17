@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DataReader")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e390785a868fdd2a499b67769c9228a685ec4ae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4368852c94255f0932f1182168b600fac1e880e3")]
 [assembly: System.Reflection.AssemblyProductAttribute("DataReader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DataReader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
