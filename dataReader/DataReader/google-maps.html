@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Map</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #map { height: 100%; }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    var locations = [
+      {"lat":50.292645,"lng":18.918571},
+      {"lat":50.034748,"lng":21.967056},
+      {"lat":54.454746,"lng":17.042385},
+      {"lat":50.843563,"lng":16.480225},
+      {"lat":51.11189,"lng":17.095453},
+      {"lat":52.764206,"lng":15.26461},
+      {"lat":53.52916,"lng":14.590936},
+      {"lat":50.278797,"lng":19.556957},
+      {"lat":50.019066,"lng":19.930712},
+      {"lat":50.01434,"lng":20.979183},
+      {"lat":51.21759,"lng":22.55403},
+      {"lat":50.147552,"lng":19.411983}
+    ];
+
+    var map = L.map('map').setView([50.0679994, 21.5529823], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    locations.forEach(loc => {
+      L.marker([loc.lat, loc.lng]).addTo(map);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\bin\Debug\net9.0\DataReader.exe
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\bin\Debug\net9.0\DataReader.deps.json
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\bin\Debug\net9.0\DataReader.runtimeconfig.json
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\bin\Debug\net9.0\DataReader.dll
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\bin\Debug\net9.0\DataReader.pdb
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.AssemblyInfoInputs.cache
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.AssemblyInfo.cs
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.csproj.CoreCompileInputs.cache
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.sourcelink.json
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.dll
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\refint\DataReader.dll
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.pdb
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\DataReader.genruntimeconfig.cache
+C:\Users\etien\Desktop\cSharp\dataReader\DataReader\obj\Debug\net9.0\ref\DataReader.dll

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Kamen</author>
+      <authoring_tool>OpenCOLLADA for 3ds Max;  Version: 1.6;  Revision: 18</authoring_tool>
+      <source_data>file:///I:/Temp/light/light-map.max</source_data>
+    </contributor>
+    <created>2016-09-15T12:35:24</created>
+    <modified>2016-09-15T12:35:24</modified>
+    <unit name="centimeter" meter="0.01"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="Material__26__Plane001_">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>1 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color>1 0 0 1</color>
+            </diffuse>
+            <specular>
+              <color>0 0 0 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADA3dsMax">
+          <extended_shader>
+            <opacity_type sid="opacity_type" type="int">0</opacity_type>
+            <falloff_type sid="falloff_type" type="int">0</falloff_type>
+            <falloff sid="falloff" type="float">0</falloff>
+            <index_of_refraction sid="index_of_refraction" type="float">1.5</index_of_refraction>
+            <wire_size sid="wire_size" type="float">1</wire_size>
+            <wire_units sid="wire_units" type="int">0</wire_units>
+            <apply_reflection_dimming sid="apply_reflection_dimming" type="bool">0</apply_reflection_dimming>
+            <dim_level sid="dim_level" type="float">0</dim_level>
+            <reflection_level sid="reflection_level" type="float">3</reflection_level>
+          </extended_shader>
+          <shader>
+            <ambient_diffuse_texture_lock sid="ambient_diffuse_texture_lock" type="bool">1</ambient_diffuse_texture_lock>
+            <ambient_diffuse_lock sid="ambient_diffuse_lock" type="bool">1</ambient_diffuse_lock>
+            <diffuse_specular_lock sid="diffuse_specular_lock" type="bool">0</diffuse_specular_lock>
+            <use_self_illum_color sid="use_self_illum_color" type="bool">0</use_self_illum_color>
+            <self_illumination sid="self_illumination" type="float">0</self_illumination>
+            <specular_level sid="specular_level" type="float">0</specular_level>
+            <soften sid="soften" type="float">0.1</soften>
+          </shader>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="Material__25__Box001_">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color>0 0.07058824 0.9921569 1</color>
+            </ambient>
+            <diffuse>
+              <color>0 0.07058824 0.9921569 1</color>
+            </diffuse>
+            <specular>
+              <color>0 0 0 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="OpenCOLLADA3dsMax">
+          <extended_shader>
+            <opacity_type sid="opacity_type" type="int">0</opacity_type>
+            <falloff_type sid="falloff_type" type="int">0</falloff_type>
+            <falloff sid="falloff" type="float">0</falloff>
+            <index_of_refraction sid="index_of_refraction" type="float">1.5</index_of_refraction>
+            <wire_size sid="wire_size" type="float">1</wire_size>
+            <wire_units sid="wire_units" type="int">0</wire_units>
+            <apply_reflection_dimming sid="apply_reflection_dimming" type="bool">0</apply_reflection_dimming>
+            <dim_level sid="dim_level" type="float">0</dim_level>
+            <reflection_level sid="reflection_level" type="float">3</reflection_level>
+          </extended_shader>
+          <shader>
+            <ambient_diffuse_texture_lock sid="ambient_diffuse_texture_lock" type="bool">1</ambient_diffuse_texture_lock>
+            <ambient_diffuse_lock sid="ambient_diffuse_lock" type="bool">1</ambient_diffuse_lock>
+            <diffuse_specular_lock sid="diffuse_specular_lock" type="bool">0</diffuse_specular_lock>
+            <use_self_illum_color sid="use_self_illum_color" type="bool">0</use_self_illum_color>
+            <self_illumination sid="self_illumination" type="float">0</self_illumination>
+            <specular_level sid="specular_level" type="float">0</specular_level>
+            <soften sid="soften" type="float">0.1</soften>
+          </shader>
+        </technique>
+      </extra>
+    </effect>
+    <effect id="ColorEffectR87G120B204">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <ambient>
+              <color>0.3411765 0.4705882 0.8 1</color>
+            </ambient>
+            <diffuse>
+              <color>0.3411765 0.4705882 0.8 1</color>
+            </diffuse>
+            <specular>
+              <color>1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float>10</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <transparent>
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="ColorEffectR87G120B204-material" name="ColorEffectR87G120B204-material">
+      <instance_effect url="#ColorEffectR87G120B204"/>
+    </material>
+    <material id="Material__26__Plane001_-material" name="Material__26__Plane001_">
+      <instance_effect url="#Material__26__Plane001_"/>
+    </material>
+    <material id="Material__25__Box001_-material" name="Material__25__Box001_">
+      <instance_effect url="#Material__25__Box001_"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="geom-Plane001" name="Plane001">
+      <mesh>
+        <source id="geom-Plane001-positions">
+          <float_array id="geom-Plane001-positions-array" count="75">-141.3882 -86.88947 0 -70.69409 -86.88947 0 0 -86.88947 0 70.69409 -86.88947 0 141.3882 -86.88947 0 -141.3882 -43.44473 0 -70.69409 -43.44473 0 0 -43.44473 0 70.69409 -43.44473 0 141.3882 -43.44473 0 -141.3882 0 0 -70.69409 0 0 0 0 0 70.69409 0 0 141.3882 0 0 -141.3882 43.44473 0 -70.69409 43.44473 0 0 43.44473 0 70.69409 43.44473 0 141.3882 43.44473 0 -141.3882 86.88947 0 -70.69409 86.88947 0 0 86.88947 0 70.69409 86.88947 0 141.3882 86.88947 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Plane001-positions-array" count="25" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Plane001-normals">
+          <float_array id="geom-Plane001-normals-array" count="75">0 0 1 0 0 0.9999999 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 1 0 0 1 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999 0 0 0.9999999</float_array>
+          <technique_common>
+            <accessor source="#geom-Plane001-normals-array" count="25" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Plane001-map1">
+          <float_array id="geom-Plane001-map1-array" count="75">0 0 0 0.25 0 0 0.5 0 0 0.75 0 0 1 0 0 0 0.25 0 0.25 0.25 0 0.5 0.25 0 0.75 0.25 0 1 0.25 0 0 0.5 0 0.25 0.5 0 0.5 0.5 0 0.75 0.5 0 1 0.5 0 0 0.75 0 0.25 0.75 0 0.5 0.75 0 0.75 0.75 0 1 0.75 0 0 1 0 0.25 1 0 0.5 1 0 0.75 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Plane001-map1-array" count="25" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Plane001-map2">
+          <float_array id="geom-Plane001-map2-array" count="75">0.02192 0.1688209 0 0.02192 0.02192 0 0.26096 0.1688209 0 0.26096 0.02192 0 0.5 0.1688209 0 0.5 0.02192 0 0.7390399 0.1688209 0 0.7390399 0.02192 0 0.9780799 0.1688209 0 0.9780799 0.02192 0 0.02192 0.3157219 0 0.26096 0.3157219 0 0.5 0.3157219 0 0.7390399 0.3157219 0 0.9780799 0.3157219 0 0.02192 0.4626228 0 0.26096 0.4626228 0 0.5 0.4626228 0 0.7390399 0.4626228 0 0.9780799 0.4626228 0 0.02192 0.6095237 0 0.26096 0.6095237 0 0.5 0.6095237 0 0.7390399 0.6095237 0 0.9780799 0.6095237 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Plane001-map2-array" count="25" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="geom-Plane001-vertices">
+          <input semantic="POSITION" source="#geom-Plane001-positions"/>
+        </vertices>
+        <triangles material="baked_Material__26" count="32">
+          <input semantic="VERTEX" source="#geom-Plane001-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#geom-Plane001-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#geom-Plane001-map1" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#geom-Plane001-map2" offset="3" set="1"/>
+          <p>5 0 5 0 0 1 0 1 6 2 6 2 1 3 1 3 6 2 6 2 0 1 0 1 6 2 6 2 1 3 1 3 7 4 7 4 2 5 2 5 7 4 7 4 1 3 1 3 7 4 7 4 2 5 2 5 8 6 8 6 3 7 3 7 8 6 8 6 2 5 2 5 8 6 8 6 3 7 3 7 9 8 9 8 4 9 4 9 9 8 9 8 3 7 3 7 10 10 10 10 5 0 5 0 11 11 11 11 6 2 6 2 11 11 11 11 5 0 5 0 11 11 11 11 6 2 6 2 12 12 12 12 7 4 7 4 12 12 12 12 6 2 6 2 12 12 12 12 7 4 7 4 13 13 13 13 8 6 8 6 13 13 13 13 7 4 7 4 13 13 13 13 8 6 8 6 14 14 14 14 9 8 9 8 14 14 14 14 8 6 8 6 15 15 15 15 10 10 10 10 16 16 16 16 11 11 11 11 16 16 16 16 10 10 10 10 16 16 16 16 11 11 11 11 17 17 17 17 12 12 12 12 17 17 17 17 11 11 11 11 17 17 17 17 12 12 12 12 18 18 18 18 13 13 13 13 18 18 18 18 12 12 12 12 18 18 18 18 13 13 13 13 19 19 19 19 14 14 14 14 19 19 19 19 13 13 13 13 20 20 20 20 15 15 15 15 21 21 21 21 16 16 16 16 21 21 21 21 15 15 15 15 21 21 21 21 16 16 16 16 22 22 22 22 17 17 17 17 22 22 22 22 16 16 16 16 22 22 22 22 17 17 17 17 23 23 23 23 18 18 18 18 23 23 23 23 17 17 17 17 23 23 23 23 18 18 18 18 24 24 24 24 19 19 19 19 24 24 24 24 18 18 18 18</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="geom-Box001" name="Box001">
+      <mesh>
+        <source id="geom-Box001-positions">
+          <float_array id="geom-Box001-positions-array" count="24">-24.28793 -18.34557 0 24.28793 -18.34557 0 -24.28793 18.34557 0 24.28793 18.34557 0 -24.28793 -18.34557 31.20018 24.28793 -18.34557 31.20018 -24.28793 18.34557 31.20018 24.28793 18.34557 31.20018</float_array>
+          <technique_common>
+            <accessor source="#geom-Box001-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Box001-normals">
+          <float_array id="geom-Box001-normals-array" count="72">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -0.9999999 0 0 -1 0 0 -0.9999999 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 0.9999999 0 0 1 0 0 0.9999999 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Box001-normals-array" count="24" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Box001-map1">
+          <float_array id="geom-Box001-map1-array" count="36">0 0 0 1 0 0 0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 1 1 0 0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Box001-map1-array" count="12" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="geom-Box001-map2">
+          <float_array id="geom-Box001-map2-array" count="72">0.3847342 0.4574937 0 0.3847342 0.02192 0 0.3847342 0.9268768 0 0.3847342 0.4913031 0 0.6645024 0.02192 0 0.6645024 0.4574937 0 0.6645024 0.4913031 0 0.6645024 0.9268768 0 0.02192 0.9268768 0 0.02192 0.4913031 0 0.3509248 0.4913031 0 0.3509248 0.9268768 0 0.3509248 0.4574937 0 0.02192 0.4574937 0 0.02192 0.02192 0 0.3509248 0.02192 0 0.6983117 0.8203079 0 0.6983117 0.4913031 0 0.9780799 0.4913031 0 0.9780799 0.8203079 0 0.6983117 0.3509248 0 0.6983117 0.02192 0 0.9780799 0.02192 0 0.9780799 0.3509248 0</float_array>
+          <technique_common>
+            <accessor source="#geom-Box001-map2-array" count="24" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="geom-Box001-vertices">
+          <input semantic="POSITION" source="#geom-Box001-positions"/>
+        </vertices>
+        <triangles material="baked_Material__25" count="12">
+          <input semantic="VERTEX" source="#geom-Box001-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#geom-Box001-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#geom-Box001-map1" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#geom-Box001-map2" offset="3" set="1"/>
+          <p>0 0 9 12 2 1 11 13 3 2 10 14 3 2 10 14 1 3 8 15 0 0 9 12 4 4 8 8 5 5 9 9 7 6 11 10 7 6 11 10 6 7 10 11 4 4 8 8 0 8 4 0 1 9 5 1 5 10 7 4 5 10 7 4 4 11 6 5 0 8 4 0 1 12 0 20 3 13 1 21 7 14 3 22 7 14 3 22 5 15 2 23 1 12 0 20 3 16 4 2 2 17 5 3 6 18 7 6 6 18 7 6 7 19 6 7 3 16 4 2 2 20 0 16 0 21 1 17 4 22 3 18 4 22 3 18 6 23 2 19 2 20 0 16</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_cameras>
+    <camera id="PhysCamera001-camera" name="PhysCamera001">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov>0</xfov>
+            <znear>0</znear>
+            <zfar>0</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+    </camera>
+  </library_cameras>
+  <library_lights>
+    <light id="EnvironmentAmbientLight" name="EnvironmentAmbientLight">
+      <technique_common>
+        <ambient>
+          <color>0 0 0</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_visual_scenes>
+    <visual_scene id="MaxScene">
+      <node name="EnvironmentAmbientLight">
+        <instance_light url="#EnvironmentAmbientLight"/>
+      </node>
+      <node id="node-Plane001" name="Plane001">
+        <matrix>1 0 0 -2.827766 0 1 0 7.455013 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#geom-Plane001">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="baked_Material__26" target="#Material__26__Plane001_-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <cast_shadows sid="cast_shadows" type="bool">1</cast_shadows>
+            <receive_shadows sid="receive_shadows" type="bool">1</receive_shadows>
+            <primary_visibility sid="primary_visibility" type="int">1</primary_visibility>
+            <secondary_visibility sid="secondary_visibility" type="int">1</secondary_visibility>
+          </technique>
+        </extra>
+      </node>
+      <node id="node-Box001" name="Box001">
+        <matrix>1 0 0 3.923147 0 1 0 -1.000976 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#geom-Box001">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="baked_Material__25" target="#Material__25__Box001_-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <cast_shadows sid="cast_shadows" type="bool">1</cast_shadows>
+            <receive_shadows sid="receive_shadows" type="bool">1</receive_shadows>
+            <primary_visibility sid="primary_visibility" type="int">1</primary_visibility>
+            <secondary_visibility sid="secondary_visibility" type="int">1</secondary_visibility>
+          </technique>
+        </extra>
+      </node>
+      <node id="node-PhysCamera001" name="PhysCamera001">
+        <matrix>0.9026698 -0.1933154 0.3844689 62.56501 0.4303338 0.4054992 -0.8064634 -73.24117 0 0.8934202 0.449222 30.80082 0 0 0 1</matrix>
+        <instance_camera url="#PhysCamera001-camera"/>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <cast_shadows sid="cast_shadows" type="bool">1</cast_shadows>
+            <receive_shadows sid="receive_shadows" type="bool">1</receive_shadows>
+            <primary_visibility sid="primary_visibility" type="int">1</primary_visibility>
+            <secondary_visibility sid="secondary_visibility" type="int">1</secondary_visibility>
+          </technique>
+        </extra>
+      </node>
+      <node id="node-PhysCamera001.Target" name="PhysCamera001.Target">
+        <matrix>1 0 0 48.99235 0 1 0 -44.77111 0 0 1 14.94223 0 0 0 1</matrix>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <cast_shadows sid="cast_shadows" type="bool">1</cast_shadows>
+            <receive_shadows sid="receive_shadows" type="bool">1</receive_shadows>
+            <primary_visibility sid="primary_visibility" type="int">1</primary_visibility>
+            <secondary_visibility sid="secondary_visibility" type="int">1</secondary_visibility>
+          </technique>
+        </extra>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#MaxScene"/>
+  </scene>
+</COLLADA>
