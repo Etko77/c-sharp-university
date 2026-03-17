@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<style>
+		html, body { width:100%; height:100%; padding:0; margin:0; }
+		#map {
+			width:100%; height:100%;
+		}
+		</style>
+		<script>
+		</script>
+		<script>
+			function initMap() {
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 6,
+					center: {lat: 50.06799940000001, lng: 21.55298229999994}
+				});
+				
+				var markers_red = locations.map(function(location, i) {
+					return new google.maps.Marker({
+						position: location,
+						icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+						/*icon: "data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/7gAOQWRvYmUAZMAAAAAB/9sAhAAGBAQEBQQGBQUGCQYFBgkLCAYGCAsMCgoLCgoMEAwMDAwMDBAMDg8QDw4MExMUFBMTHBsbGxwfHx8fHx8fHx8fAQcHBw0MDRgQEBgaFREVGh8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx//wAARCAAbABgDAREAAhEBAxEB/8QAhAAAAgIDAAAAAAAAAAAAAAAAAAYCAwQFBwEAAQUBAQAAAAAAAAAAAAAAAAECAwUGBAcQAAIBAgMGAwkAAAAAAAAAAAECBQMEABEGITESExUHQVEyInIjM3OzFLQ3EQABAwMDAwMFAAAAAAAAAAABAAIDERIEMUETYXEFMzQGwYKyIxT/2gAMAwEAAhEDEQA/AEGKipCWkaEbHUTcXtyxWhRBVSxALZZsQNw8TjOtaXGg1Xu887IWF7zRrdSrasDL0pzoVS2ZZbnC2/EzXi5zEAJmDw7z54Ww1t3TW5UZi5Qf10rXoozUJKwklVjJW3NrfUQpq0GKsQHUMu1Sw2qc9+B7C00OqXGyY52CSM3MO6ZOzv8ATYD67/ZfEuN6gVZ8i9jL2+oXTL7t/p+p3WMy2rrCnedUp3HSCBz+MOpFH5nqOWXpx1mFvLW4a6LMReWmHj+LgfbxkX7UprpokDvv/Upf3Lb9dMc2Z6hWg+LewZ935FaHQE9Zaf1lFzN8Ha0sqrPWFIBnyNNl9kEr4t54iheGvBOysPLYrsjGfEylzhv3WbfaqjK/dI6pRavTep073hKjm8pXViOHPLi2bs8OMg5LtqqGLAkbgfzml/GW9K0VXc3U0dqfWt/NRy1Fs7laIprWUI/w6So2YBYb188E8ge8kJ3hMJ+LitifS5tdOpJStiFWqMCEYEL/2Q=="*/
+						/*label: labels[i % labels.length]*/
+					});
+				});
+
+				// Add a marker clusterer to manage the markers.
+				var markerCluster = new MarkerClusterer(map, markers_red, { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			}
+		  
+		  var locations = [];
+		</script>
+		<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+	</head>
+
+	<body>
+		<div id="map"></div>
+	</body>
+
+</html>
