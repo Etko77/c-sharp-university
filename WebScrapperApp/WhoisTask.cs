@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace WebScraperApp
@@ -16,7 +17,7 @@ namespace WebScraperApp
         public async Task Run()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("═══ ЗАДАЧА 1: IP → Държава (WHOIS) ═══");
+            Console.WriteLine("═══ ЗАДАЧА 1: IP → Информация (ipinfo.io) ═══");
             Console.ResetColor();
 
             while (true)
@@ -35,26 +36,42 @@ namespace WebScraperApp
                     continue;
                 }
 
-                Console.WriteLine($"\nТърсене на информация за: {ip}");
-                Console.WriteLine(new string('─', 50));
-
-                await QuerySite1(ip);
-                await QuerySite2(ip);
-
+                await QueryIpInfo(ip);
                 Console.WriteLine();
             }
         }
 
-        private async Task QuerySite1(string ip)
+        private async Task QueryIpInfo(string ip)
         {
             try
             {
-                string url = $"https://progress.razorlabs.com/ip-detect/?ip={ip}";
-                Console.Write("  Сайт 1 (razorlabs.com) : ");
-                string result = await _httpClient.GetStringAsync(url);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(result.Trim());
-                Console.ResetColor();
+                string url = $"https://ipinfo.io/{ip}/json";
+
+                using var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.TryAddWithoutValidation("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                    "Chrome/124.0.0.0 Safari/537.36");
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("Accept-Language", "bg,en;q=0.9");
+
+                var response = await _httpClient.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+
+                using var doc = JsonDocument.Parse(json);
+                var root = doc.RootElement;
+
+                Console.WriteLine($"\nРезултат за: {ip}");
+                Console.WriteLine(new string('─', 50));
+
+                PrintField(root, "ip",       "IP адрес   ");
+                PrintField(root, "hostname", "Hostname   ");
+                PrintField(root, "city",     "Град       ");
+                PrintField(root, "region",   "Регион     ");
+                PrintField(root, "country",  "Държава    ");
+                PrintField(root, "org",      "Оператор   ");
+                PrintField(root, "timezone", "Часова зона");
             }
             catch (Exception ex)
             {
@@ -64,21 +81,14 @@ namespace WebScraperApp
             }
         }
 
-        private async Task QuerySite2(string ip)
+        private static void PrintField(JsonElement root, string key, string label)
         {
-            try
+            if (root.TryGetProperty(key, out var val))
             {
-                string url = $"https://ipapi.co/{ip}/country/";
-                Console.Write("  Сайт 2 (ipapi.co)      : ");
-                string result = await _httpClient.GetStringAsync(url);
+                string value = val.GetString() ?? "—";
+                Console.Write($"  {label} : ");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(result.Trim());
-                Console.ResetColor();
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Грешка: {ex.Message}");
+                Console.WriteLine(value);
                 Console.ResetColor();
             }
         }
