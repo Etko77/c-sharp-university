@@ -11,13 +11,12 @@ namespace WebScraperApp
     public class NewsScraperTask
     {
         private readonly HttpClient _httpClient;
-        private const string SiteUrl = "https://www.mediapool.bg/";
+        private const string SiteUrl    = "https://www.mediapool.bg/";
         private const string OutputFile = "news_mediapool.json";
 
-        // Ключови думи за изключване (case-insensitive)
         private static readonly string[] BlockedKeywords =
         {
-            "covid-19", "covid", "корона вирус", "коронавирус",
+            "covid-19", "covid", "corona", "корона вирус", "коронавирус",
             "coronavirus", "пандемия", "pandemic"
         };
 
@@ -29,13 +28,13 @@ namespace WebScraperApp
         public async Task Run()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("═══ ЗАДАЧА 3: Новини от Mediapool ═══");
+            Console.WriteLine("=== ЗАДАЧА 3: Новини от Mediapool ===");
             Console.ResetColor();
-            Console.WriteLine($"\nИзтегляне на {SiteUrl} ...");
+            Console.WriteLine("\nИзтегляне на " + SiteUrl + " ...");
 
             try
             {
-                string html = await _httpClient.GetStringAsync(SiteUrl);
+                string html = await FetchHtml(SiteUrl);
                 var articles = ParseArticles(html);
 
                 if (articles.Count == 0)
@@ -52,12 +51,37 @@ namespace WebScraperApp
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"\nГрешка: {ex.Message}");
+                Console.WriteLine("\nГрешка: " + ex.Message);
                 Console.ResetColor();
             }
         }
 
-        // ── Парсване ─────────────────────────────────────────────────
+        private async Task<string> FetchHtml(string url)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.TryAddWithoutValidation("User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                "Chrome/124.0.0.0 Safari/537.36");
+            request.Headers.TryAddWithoutValidation("Accept",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+            request.Headers.TryAddWithoutValidation("Accept-Language",
+                "bg,en-US;q=0.9,en;q=0.8");
+            request.Headers.TryAddWithoutValidation("Connection", "keep-alive");
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        // Структура на Mediapool:
+        //   <article>
+        //     <h3 class="c-article-item__title">Заглавие</h3>
+        //     <time datetime="..." class="c-article-item__date">14:38</time>
+        //   </article>
+        //
+        // Стратегия: намираме всички <article> тагове,
+        // после в тях търсим <h3> за заглавие и <time> за час.
         private static List<NewsArticle> ParseArticles(string html)
         {
             var doc = new HtmlDocument();
@@ -66,134 +90,41 @@ namespace WebScraperApp
             var articles = new List<NewsArticle>();
             var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            // Стратегия 1: намираме <article> тагове
-            var nodes = doc.DocumentNode.SelectNodes("//article");
+            // Намираме всички <article> тагове на страницата
+            var articleNodes = doc.DocumentNode.SelectNodes("//article");
+            if (articleNodes == null) return articles;
 
-            // Стратегия 2: div-ове с "news" или "article" в класа
-            if (nodes == null || nodes.Count == 0)
+            foreach (var articleNode in articleNodes)
             {
-                nodes = doc.DocumentNode.SelectNodes(
-                    "//div[contains(@class,'news') or contains(@class,'article')]");
-            }
+                // Заглавие: първия <h3> или <h2> в article-а
+                var titleNode = articleNode.SelectSingleNode(".//h3")
+                             ?? articleNode.SelectSingleNode(".//h2");
 
-            // Стратегия 3: всички <a> с достатъчно дълъг текст
-            if (nodes == null || nodes.Count == 0)
-            {
-                return FallbackLinkParse(doc, seen);
-            }
+                if (titleNode == null) continue;
 
-            foreach (var node in nodes)
-            {
-                string title = ExtractTitle(node);
+                string title = HtmlEntity.DeEntitize(titleNode.InnerText).Trim();
                 if (string.IsNullOrWhiteSpace(title)) continue;
+                if (title.Length < 10) continue;
                 if (!seen.Add(title)) continue;
                 if (ContainsBlockedKeyword(title)) continue;
 
-                var (date, time) = ExtractDateTime(node);
+                // Дата/час: първия <time> в article-а
+                string datetime = "—";
+                var timeNode = articleNode.SelectSingleNode(".//time");
+                if (timeNode != null)
+                {
+                    string inner = HtmlEntity.DeEntitize(timeNode.InnerText).Trim();
+                    datetime = string.IsNullOrWhiteSpace(inner)
+                        ? timeNode.GetAttributeValue("datetime", "—")
+                        : inner;
+                }
 
                 articles.Add(new NewsArticle
                 {
                     Title = title,
-                    Date  = date,
-                    Time  = time
+                    Date  = datetime,
+                    Time  = ""
                 });
-            }
-
-            // Ако статегии 1/2 са намерили нещо, но без заглавия – fallback
-            if (articles.Count == 0)
-                return FallbackLinkParse(doc, seen);
-
-            return articles;
-        }
-
-        private static string ExtractTitle(HtmlNode node)
-        {
-            // Приоритет: h1 > h2 > h3 > h4 > дълъг <a>
-            foreach (string xpath in new[] { ".//h1", ".//h2", ".//h3", ".//h4" })
-            {
-                var h = node.SelectSingleNode(xpath);
-                if (h != null && !string.IsNullOrWhiteSpace(h.InnerText))
-                    return HtmlEntity.DeEntitize(h.InnerText).Trim();
-            }
-
-            var link = node.SelectSingleNode(
-                ".//a[string-length(normalize-space(text())) > 20]");
-            if (link != null && !string.IsNullOrWhiteSpace(link.InnerText))
-                return HtmlEntity.DeEntitize(link.InnerText).Trim();
-
-            return "";
-        }
-
-        private static (string date, string time) ExtractDateTime(HtmlNode node)
-        {
-            // Търсим <time> елемент
-            var timeNode = node.SelectSingleNode(".//time");
-            if (timeNode != null)
-            {
-                string inner = HtmlEntity.DeEntitize(timeNode.InnerText).Trim();
-                if (!string.IsNullOrWhiteSpace(inner))
-                    return SplitDateTime(inner);
-
-                // datetime атрибут
-                string attr = timeNode.GetAttributeValue("datetime", "");
-                if (!string.IsNullOrWhiteSpace(attr))
-                    return (attr, "");
-            }
-
-            // Търсим span/div с "date" или "time" в класа
-            var dtNode = node.SelectSingleNode(
-                ".//*[contains(@class,'date') or contains(@class,'time')]");
-            if (dtNode != null && !string.IsNullOrWhiteSpace(dtNode.InnerText))
-                return SplitDateTime(HtmlEntity.DeEntitize(dtNode.InnerText).Trim());
-
-            return ("—", "");
-        }
-
-        // Опитва се да раздели "01.03.2025 14:30" на дата + час
-        private static (string date, string time) SplitDateTime(string raw)
-        {
-            string[] parts = raw.Split(new[] { ' ', '\t' },
-                StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length >= 2)
-                return (parts[0], parts[1]);
-            return (raw, "");
-        }
-
-        // Fallback: намираме всички <a> с дълги заглавия
-        private static List<NewsArticle> FallbackLinkParse(
-            HtmlDocument doc, HashSet<string> seen)
-        {
-            var articles = new List<NewsArticle>();
-
-            var links = doc.DocumentNode.SelectNodes(
-                "//a[string-length(normalize-space(text())) > 25]");
-
-            if (links == null) return articles;
-
-            foreach (var link in links)
-            {
-                string title = HtmlEntity.DeEntitize(link.InnerText).Trim();
-                if (string.IsNullOrWhiteSpace(title)) continue;
-                if (!seen.Add(title)) continue;
-                if (ContainsBlockedKeyword(title)) continue;
-
-                // Търсим дата в родителски елементи (до 4 нива нагоре)
-                string date = "—";
-                var parent = link.ParentNode;
-                for (int i = 0; i < 4 && parent != null; i++)
-                {
-                    var t = parent.SelectSingleNode(".//time");
-                    if (t != null)
-                    {
-                        date = HtmlEntity.DeEntitize(t.InnerText).Trim();
-                        if (string.IsNullOrWhiteSpace(date))
-                            date = t.GetAttributeValue("datetime", "—");
-                        break;
-                    }
-                    parent = parent.ParentNode;
-                }
-
-                articles.Add(new NewsArticle { Title = title, Date = date });
             }
 
             return articles;
@@ -207,33 +138,30 @@ namespace WebScraperApp
             return false;
         }
 
-        // ── Извеждане ────────────────────────────────────────────────
         private static void PrintArticles(List<NewsArticle> articles)
         {
             int displayed = Math.Min(articles.Count, 20);
-
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"Намерени статии : {articles.Count}  |  Показани : {displayed}");
-            Console.WriteLine("(Изключени статии с: covid, коронавирус, пандемия)");
-            Console.WriteLine(new string('═', 72));
+            Console.WriteLine("Намерени: " + articles.Count + "  |  Показани: " + displayed);
+            Console.WriteLine("(Изключени: covid, коронавирус, пандемия)");
+            Console.WriteLine(new string('=', 70));
             Console.ResetColor();
 
             for (int i = 0; i < displayed; i++)
             {
                 var a = articles[i];
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"  [{i + 1,2}] ");
+                Console.Write("  [" + (i + 1).ToString().PadLeft(2) + "] ");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(a.Title);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine($"       📅 {a.DateTimeDisplay}");
+                Console.WriteLine("       " + a.DateTimeDisplay);
                 Console.ResetColor();
                 Console.WriteLine();
             }
         }
 
-        // ── Запис в JSON ─────────────────────────────────────────────
         private static void SaveToJson(List<NewsArticle> articles)
         {
             try
@@ -242,29 +170,23 @@ namespace WebScraperApp
                 sb.AppendLine("[");
                 for (int i = 0; i < articles.Count; i++)
                 {
-                    var a = articles[i];
-                    string title = a.Title.Replace("\\", "\\\\").Replace("\"", "\\\"");
-                    string date  = a.Date.Replace("\"", "\\\"");
-                    string time  = a.Time.Replace("\"", "\\\"");
-
-                    sb.Append($"  {{ \"title\": \"{title}\", " +
-                              $"\"date\": \"{date}\", " +
-                              $"\"time\": \"{time}\" }}");
+                    var a    = articles[i];
+                    string t = a.Title.Replace("\\", "\\\\").Replace("\"", "\\\"");
+                    string d = a.Date.Replace("\"", "\\\"");
+                    sb.Append("  { \"title\": \"" + t + "\", \"datetime\": \"" + d + "\" }");
                     if (i < articles.Count - 1) sb.Append(",");
                     sb.AppendLine();
                 }
                 sb.AppendLine("]");
-
                 File.WriteAllText(OutputFile, sb.ToString(), Encoding.UTF8);
-
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.WriteLine($"✔  Записано в: {Path.GetFullPath(OutputFile)}");
+                Console.WriteLine("Записано в: " + Path.GetFullPath(OutputFile));
                 Console.ResetColor();
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine($"(Неуспешен запис на JSON: {ex.Message})");
+                Console.WriteLine("(Грешка при запис: " + ex.Message + ")");
                 Console.ResetColor();
             }
         }
