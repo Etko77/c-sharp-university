@@ -8,13 +8,8 @@ namespace WebScraperApp
     {
         static async Task Main(string[] args)
         {
-            // Споделен HttpClient с browser User-Agent
+            // Споделен HttpClient — всяка задача сама слага нужните headers
             using var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add(
-                "User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                "Chrome/120.0.0.0 Safari/537.36");
             httpClient.Timeout = TimeSpan.FromSeconds(20);
 
             // Инициализираме всяка задача с общия клиент
