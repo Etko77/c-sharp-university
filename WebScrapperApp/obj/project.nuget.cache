@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "JxRWBvSJokg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\etien\\Desktop\\cSharp\\WebScrapperApp\\WebScraperApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\etien\\.nuget\\packages\\htmlagilitypack\\1.11.61\\htmlagilitypack.1.11.61.nupkg.sha512"
+  ],
+  "logs": []
+}
