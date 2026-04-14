@@ -2,15 +2,17 @@ using System;
 
 public class Contact
 {
-    private string name;
+    private string name = ""; 
 
     public string Name
     {
         get => name;
-        set => name = value ?? GenerateRandomName();
+        set => name = string.IsNullOrWhiteSpace(value)
+            ? GenerateRandomName()
+            : value.Trim();
     }
 
-    public Contact(string name) => Name = name;
+    public Contact(string? name) => Name = name;
 
     private string GenerateRandomName() =>
         $"user{new Random().Next(10000, 99999)}";
