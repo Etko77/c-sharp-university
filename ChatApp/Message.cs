@@ -3,7 +3,7 @@ using System;
 public class Message
 {
     public Contact Author { get; set; }
-    public string Text { get; set; }
+    public string Text { get; private set; }
     public DateTime CreatedAt { get; } = DateTime.Now;
     public bool IsEdited { get; private set; }
 
@@ -13,12 +13,10 @@ public class Message
         Text = text ?? "Empty message";
     }
 
-    public void Edit(string newText)
-    {
-        Text = newText ?? Text;
-        IsEdited = true;
-    }
+    public void Edit(string newText) =>
+        (Text, IsEdited) = (newText ?? Text, true);
 
     public override string ToString() =>
-        $"[{CreatedAt}] {Author?.Name}: {Text} {(IsEdited ? "(edited)" : "")}";
+        $"[{CreatedAt:HH:mm:ss}] {Author?.Name}: {Text}" +
+        $"{(IsEdited ? " (edited)" : "")}";
 }
